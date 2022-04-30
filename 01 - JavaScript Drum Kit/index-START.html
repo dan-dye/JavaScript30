@@ -58,25 +58,62 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-  const keys = document.querySelectorAll("div.key");
+  const buttons = document.querySelectorAll("div.key");
   const sounds = document.querySelectorAll("audio");
   
-  // sounds.forEach(sound => {
-  //   sound.addEventListener("play", function(e) {
-  //     sound.c
-  //     sound.play();
-  //   })
-  // })
-  keys.forEach(key => {
-    key.addEventListener("click", function(e) {
-      sounds.forEach(sound => {
-        if(this.dataset.key === sound.dataset.key) {
-          sound.currentTime = 0;
-          sound.play();
-        };
-      })
+  // buttons.forEach(button => {
+  //   button.addEventListener("click", playSound);
+
+  // });
+
+  // window.addEventListener('keydown', function (e) {
+  //    buttons.forEach(button => {
+  //      if(e.keyCode == button.dataset.key) {
+  //        playButtonTransition(button);
+  //      }
+  //    })
+  // });
+    window.addEventListener('keydown', function (e) {
+     matchKey(e, buttons, playButtonTransition);
+  });
+  // window.addEventListener('keyup', function (e) {
+  //   buttons.forEach(button => {
+  //      if(e.keyCode == button.dataset.key) {
+  //        stopButtonTransition(button);
+  //      }
+  //    })
+  // });
+  window.addEventListener('keyup', function (e) {
+     matchKey(e, buttons, stopButtonTransition);
+  });
+
+  
+  function playButtonTransition(button) {
+    button.classList.add('playing');
+  }
+
+  function stopButtonTransition(button) {
+    button.classList.remove('playing');
+  }
+
+  function matchKey(event, array, func) {
+    array.forEach(item => {
+      if(event.keyCode == item.dataset.key) {
+        func(item);
+      }
     })
-  })
+  }
+
+
+  // function playSound() {
+  //   sounds.forEach(sound => {
+  //     if(this.dataset.key === sound.dataset.key) {
+  //       sound.currentTime = 0;
+  //       sound.play();
+  //     };
+  //   })
+  // }
+
 </script>
 
 
